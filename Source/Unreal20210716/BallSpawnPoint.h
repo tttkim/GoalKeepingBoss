@@ -37,7 +37,11 @@ public:
 	UPROPERTY()
 	float currentTime = 0;
 
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+	UStaticMeshComponent* meshComp;
+
+
 	// °øÀå
-	UPROPERTY(EditDefaultsOnly, Category = "EnemyClass")
-	TSubclassOf<class ABall> ballFactory;
+	UPROPERTY(EditAnywhere, Category = "ProjectileClass")
+	TSubclassOf<class ABall> ProjectileClass;
 };

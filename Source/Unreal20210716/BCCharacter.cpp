@@ -11,12 +11,13 @@ ABCCharacter::ABCCharacter()
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SPRINGARM"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
 
-	SpringArm->SetupAttachment(GetCapsuleComponent());
-	Camera->SetupAttachment(SpringArm);
+	//SpringArm->SetupAttachment(GetCapsuleComponent());
+	Camera->SetupAttachment(GetCapsuleComponent());
+	Camera->SetRelativeLocationAndRotation(FVector(-800.0f, 0.0f, 0.0f), FRotator(10.0f, 0.0f, 0.0f));
 
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -88.0f), FRotator(0.0f, -90.0f, 0.0f));
-	SpringArm->TargetArmLength = 500.0f;
-	SpringArm->SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
+	//SpringArm->TargetArmLength = 800.0f;
+	//SpringArm->SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
 
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_THEBOSS(TEXT("/Game/Character/theboss.theboss"));
 	if (SK_THEBOSS.Succeeded())
@@ -31,7 +32,7 @@ ABCCharacter::ABCCharacter()
 	{
 		GetMesh()->SetAnimInstanceClass(BOSS_ANIM.Class);
 	}
-	GetCharacterMovement()->JumpZVelocity = 800.0f;
+	GetCharacterMovement()->JumpZVelocity = 500.0f;
 }
 
 // Called when the game starts or when spawned
@@ -59,7 +60,7 @@ void ABCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void ABCCharacter::MoveRight(float NewAxisValue)
 {
-	BCLOG(Warning, TEXT("%f"), NewAxisValue);
+	// BCLOG(Warning, TEXT("%f"), NewAxisValue);
 	AddMovementInput(GetActorRightVector(), NewAxisValue);
 }
 

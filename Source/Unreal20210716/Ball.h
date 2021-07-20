@@ -4,6 +4,7 @@
 
 #include "Unreal20210716.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "Ball.generated.h"
 
 UCLASS()
@@ -19,9 +20,12 @@ public:
 		UStaticMeshComponent* meshComp;
 
 	UPROPERTY(VisibleAnywhere, Category = "Component")
-		USphereComponent* sphereComp;
+		USphereComponent* CollisionComponent;
 
+	UPROPERTY(VisibleAnywhere, Category = Movement)
+		UProjectileMovementComponent* ProjectileMovementComponent;
 
+	void FireInDirection(const FVector& ShootDirection);
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,4 +35,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 };
